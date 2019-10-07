@@ -31,9 +31,8 @@ public class GameOFLifeTest {
         assertEquals(evolvedCluster, gameOfLife.evolvePattern(initialCluster));
     }
 
-
     @Test
-    public void givenOneClusterWithOnlyOneAlive_whenApplyTwoCondition_thenReturnEvolveClusterOFThreeAlive()
+    public void givenOneClusterWithOnlyTwoAlive_whenApplyTwoCondition_thenReturnEvolveClusterOFThreeAlive()
     {
         List<Integer> initialCluster = Arrays.asList(1,0,0,1);
         Rule firstRule = new Rule(0, 1, 0);
@@ -41,6 +40,19 @@ public class GameOFLifeTest {
         List<Rule> ruleList= Arrays.asList(firstRule,secondRule);
         GameOfLife gameOfLife = new GameOfLife(ruleList);
         List<Integer> evolvedCluster = Arrays.asList(1,0,1,1);
+
+        assertEquals(evolvedCluster, gameOfLife.evolvePattern(initialCluster));
+    }
+
+    @Test
+    public void givenOneClusterWithOnlyTwoAlive_whenApplyTwoCondition_thenReturnEvolveClusterOFOneAlive()
+    {
+        List<Integer> initialCluster = Arrays.asList(0,1,1,0);
+        Rule firstRule = new Rule(0, 1, 0);
+        Rule secondRule = new Rule(0, 0, 1);
+        List<Rule> ruleList= Arrays.asList(firstRule,secondRule);
+        GameOfLife gameOfLife = new GameOfLife(ruleList);
+        List<Integer> evolvedCluster = Arrays.asList(1,0,0,0);
 
         assertEquals(evolvedCluster, gameOfLife.evolvePattern(initialCluster));
     }
