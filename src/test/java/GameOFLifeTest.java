@@ -19,5 +19,14 @@ public class GameOFLifeTest {
         assertEquals(evolvedCluster, gameOfLife.evolvePattern(initialCluster));
     }
 
+    @Test
+    public void givenOneClusterWithOnlyOneAlive_whenApplyOneCondition_thenReturnEvolveClusterOFTwoAlive() {
+        List<Integer> initialCluster = Arrays.asList(0,0,0,1);
+        Rule rule = new Rule(0, 0, 0);
+        GameOfLife gameOfLife = new GameOfLife(rule);
+        List<Integer> evolvedCluster = Arrays.asList(1,1,0,0);
+
+        assertEquals(evolvedCluster, gameOfLife.evolvePattern(initialCluster));
+    }
 
 }
