@@ -1,29 +1,32 @@
-import javax.print.DocFlavor;
+
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class GameOfLife {
-    private Rule rule;
+    private List<Rule> rule;
     private List<Integer> evolvedCluster = new ArrayList<>();
     private List<Integer> paddedCluster= new ArrayList<>();;
 
-    public GameOfLife(Rule rule) {
+    public GameOfLife(List<Rule> rule) {
         this.rule = rule;
     }
 
     public List<Integer> evolvePattern(List<Integer> initialCluster) {
-        paddedCluster = paddingEvolvedCluster(initialCluster);
 
-        for (int i = 1; i < paddedCluster.size() - 1; i++) {
-            if (paddedCluster.get(i) == rule.current && paddedCluster.get(i - 1) == rule.left && paddedCluster.get(i + 1) == rule.right) {
-                evolvedCluster.add(1);
-            } else {
-                evolvedCluster.add(0);
-            }
+        paddedCluster = paddingEvolvedCluster(initialCluster);
+        for(int i=0;i<initialCluster.size();i++)
+        {
+            evolvedCluster.add(0);
         }
 
+        for(Rule currentRule: rule) {
+            for (int i = 1; i < paddedCluster.size() - 1; i++) {
+                if (paddedCluster.get(i) == currentRule.current && paddedCluster.get(i - 1) == currentRule.left && paddedCluster.get(i + 1) == currentRule.right) {
+                    // evolvedCluster.add(i - 1, 1);
+                    evolvedCluster.set(i - 1, 1);
+                }
+            }
+        }
         return evolvedCluster;
     }
 
